@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookSense</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header><h1> <a href="/"> BookSense </a></h1><div class="menu"><a href="/" class="btn">Top 50</a><a href="/recommend" class="btn">Recommender</a></div></header>
+    <form class="book-form" action="/books" method="post">
+        <input class="book-input" name="user_input" type="text" class="form-control"><br>
+        <input type="submit" class="btn">
+    </form>
+        <div class="books">
+            {% if data == null %}
+            <h4 class="blank-notice">To use this collaborative filtering based book recommendation system enter book name in the address to check related books. Ex: 1984, Animal Farm etc. <br> You can also click on any book in the results to see its related books.</h4>
+            {% endif %}
+            {% if data == 'notfound' %}
+            <h4 class="blank-notice">Sorry no books with title "{{current_book}}" found. Please note that the book names are case sensitive.</h4>
+            {% endif %}
+            {% if data and data != 'notfound' %}
+            <h2 class="collection-title">Showing books related to <span style="color: orange; display: inline;">{{current_book}}</span></h2>
+             {% for i in data %}
+            <a href="/books/{{i[1]}}">
+             <div class="card">
+                <img class="card-img" src="{{i[0]}}" />
+                <div class="card-title">{{i[1]}}</div>
+                <div class="card-year">{{i[2]}}</div>
+                <div class="card-author">{{i[3]}}</div>
+                <div class="card-publisher">{{i[4]}}</div>
+            </div>
+        </a>
+            {% endfor %}
+
+            {% endif %}
+        </div>
+        <footer>(C) <a href="https://github.com/kaushalsrivastava">Kaushal Srivastava </a></footer>
+</body>
+</html>

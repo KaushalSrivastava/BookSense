@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookSense</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header><h1> <a href="/"> BookSense </a></h1><div class="menu"><a href="/" class="btn">Top 50</a><a href="/recommend" class="btn">Recommender</a></div></header>
+   
+        <div class="books">
+            <h2 class="collection-title"><span style="color: orange; display: inline;">Top 50</span> Books according to user ratings</h2>
+            {% for i in range(title|length) %}
+            <a href="/books/{{title[i]}}">
+            <div class="card">
+                <img class="card-img" src="{{image[i]}}" />
+                <div class="card-title">{{title[i]}}</div>
+                <div class="card-year">{{year[i]}}</div>
+                <div class="card-author">{{author[i]}}</div>
+                <div class="card-publisher">{{publisher[i]}}</div>
+            </div>
+        </a>
+            {% endfor %}
+        </div>
+   <footer>(C) <a href="https://github.com/kaushalsrivastava">Kaushal Srivastava </a></footer>
+</body>
+</html>
